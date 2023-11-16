@@ -5,7 +5,6 @@ import 'package:whatsapp_clone/presentation/screens/calls/call_logs.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/k_images.dart';
 import '../../../utils/utils.dart';
-import '../routes/routes_names.dart';
 import 'chat/conversation_list.dart';
 import 'chat/message_controller.dart';
 import 'community/community_page.dart';
@@ -51,13 +50,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
           titleSpacing: 0,
           actions: [
             IconButton(
-                onPressed: () {
-                  Utils.openCamera();
-                },
+                onPressed: () {},
                 icon: SvgPicture.asset(KImages.camera)),
             if (selectedTab != 2)
               IconButton(
-                  onPressed: () {}, icon: SvgPicture.asset(KImages.search)),
+                  onPressed: () {},
+                  icon: SvgPicture.asset(KImages.search)),
             PopupMenuButton(
                 icon: const Icon(Icons.more_vert),
                 offset: const Offset(0, 60),
@@ -147,91 +145,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
           UpdatesPage(),
           CallLogs(),
         ]),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: selectedTab == 0
-            ? const SizedBox()
-            : Stack(
-          clipBehavior: Clip.none,
-          children: [
-            // if (selectedTab == 2)
-            Positioned(
-              bottom: selectedTab == 2 ? 70 : 0,
-              child: FloatingActionButton(
-                onPressed: () {
-                  press(selectedTab);
-                },
-                elevation: 0,
-                hoverElevation: 2,
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.ease,
-                  height: 40.h,
-                  width: 40.w,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      color: Colors.green[100],
-                      borderRadius: BorderRadius.circular(8)),
-                  child: const Icon(
-                    Icons.edit,
-                    color: primaryColor,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            FloatingActionButton(
-              onPressed: () {
-                press(selectedTab);
-              },
-              child: Container(
-                height: 50.h,
-                width: 50.w,
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(12)),
-                child: getIcon(selectedTab),
-              ),
-            ),
-          ],
-        ),
       ),
     );
-  }
-
-  Widget getIcon(int index) {
-    switch (index) {
-      case 1:
-        return SvgPicture.asset(
-          KImages.message,
-        );
-      case 2:
-        return SvgPicture.asset(
-          KImages.cameraFillWhite,
-        );
-      case 3:
-        return SvgPicture.asset(
-          KImages.phone,
-        );
-      default:
-        return const SizedBox();
-    }
-  }
-
-  press(int index) {
-    switch (index) {
-      case 1:
-        Navigator.pushNamed(context, RouteNames.contactPage);
-        break;
-      case 2:
-        Utils.openCamera();
-        break;
-      case 3:
-        Navigator.pushNamed(context, RouteNames.contactPage);
-        break;
-      default:
-        null;
-        break;
-    }
   }
 }
